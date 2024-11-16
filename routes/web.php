@@ -319,7 +319,8 @@ Route::get('user-login/{id}', [UserController::class, 'LoginManage'])->name('use
 Route::get('/form/{code}', [FormBuilderController::class, 'formView'])->name('form.view')->middleware(['XSS']);
 Route::post('/form_view_store', [FormBuilderController::class, 'formViewStore'])->name('form.view.store')->middleware(['XSS']);
 
-Route::get('/', [DashboardController::class, 'landingpage'])->middleware(['XSS', 'revalidate']);
+// Route::get('/', [DashboardController::class, 'landingpage'])->middleware(['XSS', 'revalidate']);
+Route::get('/', [AuthenticatedSessionController::class, 'showLoginForm'])->middleware('guest');
 
 //================================= Invoice Payment Gateways  ====================================//
 Route::group(['middleware' => ['verified']], function () {
